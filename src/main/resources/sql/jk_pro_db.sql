@@ -23,16 +23,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `car_orders`;
 CREATE TABLE `car_orders` (
   `id` int(20) NOT NULL,
-  `state` varchar(20) COMMENT '订单状态',
   `number` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '订单编号',
   `price` decimal(10,2) DEFAULT NULL COMMENT '总金额',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 -- ----------------------------
 -- Records of car_orders
 -- ----------------------------
 BEGIN;
-INSERT INTO `car_orders` VALUES (1,'1','23234234', 45.00);
+INSERT INTO `car_orders` VALUES (1, '23234234', 45.00);
 COMMIT;
 
 -- ----------------------------
@@ -40,7 +40,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `car_orders_details`;
 CREATE TABLE `car_orders_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `goods_name` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '物品名称',
   `num` int(20) DEFAULT NULL COMMENT '物品数量',
   `produce` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '生产商',
@@ -88,7 +88,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `tear_down_details`;
 CREATE TABLE `tear_down_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
   `produce` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `cargoods_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,

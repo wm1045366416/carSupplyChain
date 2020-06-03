@@ -30,7 +30,28 @@ public class CarGoodsServiceImpl implements CarVGoodsService {
     public List<CarOrderDetails> queryOrdersDetails(Integer id) {
         return dao.queryOrdersDetails(id);
     }
-
-
-
+    @Override
+    public boolean saveOrders(List<Cart> list){
+        return dao.saveOrders(list);
+    }
+    @Override
+    public TearDownDetails queryTearDownDetails(CarOrderDetails car){
+        return dao.queryTearDownDetails(car);
+    }
+    @Override
+    public boolean saveTeamDownDetail(TearDownDetails t){
+        return dao.saveTeamDownDetail(t);
+    }
+    @Override
+    public boolean updateTeamDownDetail(TearDownDetails t){
+        return dao.updateTeamDownDetail(t);
+    }
+    @Override
+    public boolean deleteOrders(Integer id){
+        return dao.deleteOrders(id);
+    }
+    @Override
+    public List<CarOrderDetails> queryDetails(){
+        return dao.queryDetails();
+    }
 }

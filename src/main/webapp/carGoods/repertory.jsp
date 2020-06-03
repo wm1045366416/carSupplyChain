@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>第一个 ECharts 实例</title>
     <!-- 引入 echarts.js -->
     <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script src="../js/jquery-1.8.2.min.js"></script>
 </head>
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -18,9 +19,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="main1" style="width: 600px;height:400px;"></div>
 <script type="text/javascript">
+    function init(list){
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
-
+    var xAxis_data = new Array;
+    var series_data = new Array;
+    var legend_data = new Array();
+    var series_datas = new Array();
+    for(var i=0;i<list.length;i++){
+        xAxis_data[i]=list[i].goodsname;
+        series_data[i]=list[i].num;
+        legend_data[i] = list[i].goodsname;
+        var map = {
+            "value":list[i].price,
+            "name":list[i].goodsname
+        }
+        //map.set(list[i].price,list[i].goodsname);
+        series_datas.push(map);
+    }
     // 指定图表的配置项和数据
     var option = {
         title: {
@@ -31,13 +47,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             data:['销量']
         },
         xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            data: xAxis_data//["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
         },
         yAxis: {},
         series: [{
             name: '销量',
             type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
+            data: series_data
         }]
     };
 
@@ -48,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var myChart = echarts.init(document.getElementById('main1'));
     option = {
         title : {
-            text: '某站点用户访问来源',       //大标题
+            text: '汽车配件销售金额明细',       //大标题
             subtext: '纯属虚构',                //类似于副标题
             x:'center'                 //标题位置   居中
         },
@@ -59,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         legend: {                           //图例组件。
             orient: 'vertical',             //图例列表的布局朝向
             left: 'left',
-            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            data: legend_data//['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
         },
         series : [              //系列列表。每个系列通过 type 决定自己的图表类型
             {
@@ -67,13 +83,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
-                data:[
+                data:series_datas/*[
                     {value:335, name:'直接访问'},
                     {value:310, name:'邮件营销'},
                     {value:234, name:'联盟广告'},
                     {value:135, name:'视频广告'},
                     {value:1548, name:'搜索引擎'}
-                ],
+                ]*/,
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -85,6 +101,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         ]
     };
     myChart.setOption(option);
+    }
+    window.onload = function() {
+        var list = new Array;
+        list = getList();
+
+        // 方法体
+
+        init(list);
+    }
+    function getList() {
+        var nameList=new Array;
+        $.ajax({
+            type:"post",
+            async:false,
+            url:"${pageContext.request.contextPath }/cargoods/queryListNew",
+            success:function(data) {
+                nameList = data;
+                return nameList;
+            }
+        });
+        return nameList;
+    }
 </script>
 </body>
 </html>

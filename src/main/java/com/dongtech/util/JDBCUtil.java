@@ -14,7 +14,7 @@ public class JDBCUtil {
     public static Connection getMysqlConn(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jk_pro_db?serverTimezone=UTC",
+            return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jk_pro_db?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false",
                     "root","root");
         } catch (Exception e) {
             e.printStackTrace();

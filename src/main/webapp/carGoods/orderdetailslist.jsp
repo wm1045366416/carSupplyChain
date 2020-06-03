@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/list.css">
-    <title>维护图书</title>
+    <title>订单详情</title>
 </head>
 <body>
 <div class="w">
@@ -15,12 +15,20 @@
         <div class="list-bd">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
-                    <th width="18%">名称</th>
-                    <th width="5%">数量</th>
-                    <th width="5%">生产地</th>
-                    <th width="5%">价格</th>
+                    <th width="25%">名称</th>
+                    <th width="25%">数量</th>
+                    <th width="25%">生产地</th>
+                    <th width="25%">价格</th>
                 </tr>
+                <c:forEach items="${list}" var="item">
+                    <tr>
+                        <td >${item.goodsname}</td>
+                        <td>${item.num}</td>
+                        <td>${item.produce}</td>
+                        <td>${item.price}</td>
 
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </div>

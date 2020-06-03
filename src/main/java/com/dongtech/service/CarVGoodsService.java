@@ -16,5 +16,11 @@ public interface CarVGoodsService {
 
     List<CarOrderDetails> queryOrdersDetails(Integer id);
 
+    boolean saveOrders(List<Cart> list);
 
+    TearDownDetails queryTearDownDetails(CarOrderDetails car);
+    boolean saveTeamDownDetail(TearDownDetails t);
+    boolean deleteOrders(Integer id);
+    public boolean updateTeamDownDetail(TearDownDetails t);
+    public List<CarOrderDetails> queryDetails();
 }

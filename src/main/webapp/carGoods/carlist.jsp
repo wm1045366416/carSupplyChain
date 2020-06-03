@@ -12,26 +12,43 @@
 <body>
 <div class="w">
     <header>
-        <a href="${pageContext.request.contextPath }/cargoods/getCart" >
-            <input type="button" οnclick="javascrtpt:window.location.href='${pageContext.request.contextPath}/cargoods/getCart'" value="下单" class="btn">
+        <a href="${pageContext.request.contextPath }/cartController/addOrder" >
+            <input type="button" οnclick="javascrtpt:window.location.href='${pageContext.request.contextPath}/cartController/addOrder'" value="下单" class="btn" >
         </a>
-        <%--<a href="${pageContext.request.contextPath }/cargoods/deleteAllCookie" >--%>
-            <%--<input type="button" οnclick="javascrtpt:window.location.href='${pageContext.request.contextPath}/cargoods/deleteAllCookie'" value="清空购物车" class="btn">--%>
-        <%--</a>--%>
+
+        <a href="${pageContext.request.contextPath }/cartController/deleteAllCookie" >
+            <input type="button" οnclick="javascrtpt:window.location.href='${pageContext.request.contextPath}/cartController/deleteAllCookie'" value="清空购物车" class="btn" >
+        </a>
     </header>
     <div class="list">
         <div class="list-bd">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
-                    <th width="18%">名称</th>
-                    <th width="5%">价格</th>
-                    <th width="10%">描述</th>
+                    <th style="display:none">>编号</th>
+                    <th width="20%">名称</th>
+                    <th width="10%">价格</th>
+                    <th width="20%">描述</th>
+                    <th width="20%">生产商</th>
                     <th width="10%">数量</th>
+                    <th width="20%">操作</th>
                 </tr>
-
+                <c:forEach items="${list}" var="item">
+                    <tr>
+                        <td style="display:none">${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                        <td>${item.description}</td>
+                        <td>${item.produce}</td>
+                        <td>${item.num}</td>
+                        <td>
+                            <a id="delete" href="${pageContext.request.contextPath}/cartController/deleteGoods?goodsId=${item.id}" onclick="getCart(${item.id})">删除</a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </div>
 </div>
+
 </body>
 </html>

@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/list.css">
-    <title>维护图书</title>
+    <title>下单列表</title>
 </head>
 <body>
 <div class="w">
@@ -15,15 +15,32 @@
         <div class="list-bd">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
-                    <th width="18%">编号</th>
-                    <th width="5%">价格</th>
-                    <th width="10%">操作</th>
+                    <th style="display:none">编号</th>
+                    <th width="33%">编号</th>
+                    <th width="33%">价格</th>
+                    <th width="33%">操作</th>
                     <%--<th width="10%">数量</th>--%>
                 </tr>
+                <c:forEach items="${list}" var="item">
+                    <tr>
+                        <td style="display:none">${item.id}</td>
+                        <td>${item.number}</td>
+                        <td>${item.price}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/cartController/orderdetail?id=${item.id}">订单详情</a>
+                            <a href="${pageContext.request.contextPath}/cartController/teardowndetail?id=${item.id}" onclick="getCartOrder()">拆单</a>
+                        </td>
 
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </div>
 </div>
+<script type="application/javascript">
+    getCartOrder = function(id){
+        alert("拆单成功！");
+    }
+</script>
 </body>
 </html>
